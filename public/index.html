@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wat $if social experiment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="rain.css">
+</head>
+<body>
+  <!-- Add Header Section -->
+  <header class="header">
+    <div class="rain"></div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+      <div class="question-mark">?</div>
+    </div>
+    <div class="main-links">
+      <ul>
+        <li>
+          <a href="https://www.watif.org">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/home-page-white-icon.png" alt="Home Icon" style="width: 24px; height: 24px;">
+          </a>
+          <a href="https://x.com/watifCTO" target="_blank">
+            <svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="rgb(240, 240, 250)">
+              <path d="M23 3.01s-2.018 1.192-3.14 1.53a4.48 4.48 0 00-7.86 3v1a10.66 10.66 0 01-9-4.53s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.278-.028-.556-.08-.83C21.94 5.674 23 3.01 23 3.01z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://t.me/watifCTO" target="_blank">
+            <svg stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="rgb(240, 240, 250)" style="width: 100%; height: 100%">
+              <path d="M21 5L2 12.5l7 1M21 5l-2.5 15L9 13.5M21 5L9 13.5m0 0V19l3.249-3.277" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://dexscreener.com/solana/93uebvfst1bczdahdhcrqndkjipjydcxsfeuqpye68l4" target="_blank">
+            <img src="https://framerusercontent.com/images/XTdKMH4QJgl4ctqzrVKmrfAJAYA.png" alt="dexscreener" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="other-links">
+      <a id="roadmap" href="#">Roadmap</a>
+      <a id="whitepaper" href="#">Whitepaper</a>
+    </div>
+  </header>
+
+  <!-- Add Total Votes Display Container -->
+  <div class="total-votes-container">
+    <div id="total-votes" class="total-votes">
+      Total Votes: <span id="total-votes-count" style="color: var(--gold);">0</span>
+    </div>
+  </div>
+
+  <!-- Existing Content -->
+  <div id="app">
+    <div id="question-container">
+      <h1 id="question">Loading...</h1>
+      <div class="options-container">
+        <div class="option-card" id="option-a">
+          <div class="image-container">
+            <div class="image-inner">
+              <div class="image-front">
+                <img src="" alt="Option A" class="option-image">
+              </div>
+              <div class="image-back">
+                <div class="result-percentage"></div>
+              </div>
+            </div>
+          </div>
+          <p class="option-text"></p>
+        </div>
+        <div class="option-card" id="option-b">
+          <div class="image-container">
+            <div class="image-inner">
+              <div class="image-front">
+                <img src="" alt="Option B" class="option-image">
+              </div>
+              <div class="image-back">
+                <div class="result-percentage"></div>
+              </div>
+            </div>
+          </div>
+          <p class="option-text"></p>
+        </div>
+      </div>
+    </div>
+    <div id="results-container" style="display:none;">
+      <h2>Results:</h2>
+      <p>Option A: <span id="result-a">50%</span></p>
+      <p>Option B: <span id="result-b">50%</span></p>
+      <button id="next-question">Next Question</button>
+    </div>
+  </div>
+
+  <div class="notice">
+    The vote percentages displayed are for head-to-head comparison of the choices.
+  </div>
+
+  <!-- Popup containers -->
+  <!-- Popup container -->
+  <div id="roadmap-popup" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn"></span>
+      <ul class="roadmap-list">
+        <h2>Phase 1 - The birth of the best narrative on Solana
+        </h2>
+
+        <li class="completed"><strong>1. Hostile Takeover:</strong> The punishment of the ex-dev begins! &#9989; </li>
+        <li class="completed"><strong>2. Assemble the Dream Team:</strong> A whale, a leader, a dev, and meme masters
+          unite! &#9989;
+        </li>
+        <li class="completed"><strong>3. Website 2.0:</strong> A sleek site that puts us on the map! &#9989;</li>
+        <li class="completed"><strong>4. Major Listings Secured:</strong> First round of major listings to expand our
+          reach &#9989;</li>
+        <h2>Phase 2 - Expanding our reach and get to midcap status</h2>
+
+        <li class="completed"><strong>5. AI TG Memebot Unleashed:</strong> Spreading multilingual "Wat if" musings to
+          our
+          cult-like community who embody the spirit of human curiosity. &#9989;
+        </li>
+        <li><strong>6. Meme Generator:</strong> An AI-enhanced tool to flood Twitter with 'wat if' memes—let's grow our
+          community! &#9989</li>
+        <li><strong>7. Profile Picture Generator:</strong> Twitter and Telegram will see $IF in every nook and
+          cranny as our community forges it into their digital identities. &#9989</li>
+        <li><strong>8. Twitter Domination:</strong> Our TG bot expands into a Twitter bot, beginning
+          it's conquest to consistently engage the crypto community with no days off. </li>
+        <h2>Phase 3 - Solidifying our presence as a large cap coin</h2>
+        <li><strong>9. Social Media Expansion:</strong> Begin onboarding mainstream attention via a TikTok and
+          Instagram page</li>
+        <li><strong>10. Strategic Rewards:</strong> Forming partnerships to amplify our influence and offer unique
+          benefits to holders of $IF</li>
+        <li><strong>11. Secret Plan:</strong> Yes, we have an ace up our sleeve. We will do our part for the space by
+          releasing something fun and disruptive 🧑‍💻</li>
+        <li><strong>12. Final Listings:</strong> Final round of the biggest listings</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="whitepaper-popup" class="popup-overlay">
+    <div class="whitepaper-content"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

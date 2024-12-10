@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "text": "wat <span class='ifOrangeColor'>$if</span> you could go to dinner with one of the two?",
+    "optionA": {
+      "text": "Elon Musk",
+      "image": "/images/elon.jpg"
+    },
+    "optionB": {
+      "text": "Vitalik Buterin",
+      "image": "/images/vitalik.jpg"
+    }
+  },
+  {
+    "id": "2",
+    "text": "wat <span class='ifOrangeColor'>$if</span> you could only go on vacation in one place?",
+    "optionA": {
+      "text": "Hawaii",
+      "image": "/images/hawaii.jpg"
+    },
+    "optionB": {
+      "text": "Switzerland",
+      "image": "/images/switzerland.jpg"
+    }
+  },
+  {
+    "id": "3",
+    "text": "wat <span class='ifOrangeColor'>$if</span> you could choose happiness or wealth?",
+    "optionA": {
+      "text": "Happiness",
+      "image": "/images/happiness.jpg"
+    },
+    "optionB": {
+      "text": "Wealth",
+      "image": "/images/wealth.jpg"
+    }
+  }
+]

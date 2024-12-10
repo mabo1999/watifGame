@@ -1,0 +1,193 @@
+/* Universal styles using CSS custom properties */
+:root {
+    --gold: #f7931a;
+    --navy: #001f3f;
+  }
+  
+  /* Popup container - hidden by default */
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+  }
+  
+  /* Popup content */
+  .popup-content {
+    box-sizing: border-box;
+    background: var(--navy);
+    padding: 15px 0;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    height: 70%;
+    animation: slideIn 0.7s ease-out;
+    box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold), 0 0 30px var(--gold);
+    color: #fff;
+  }
+  
+  .whitepaper-content {
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255);
+    background-image: url("./images/whitepaper.png");
+    background-size: 95% 95%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 80%;
+    height: 70%;
+    animation: slideIn 0.7s ease-out;
+    box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold), 0 0 30px var(--gold);
+    color: #fff;
+  }
+  
+  .popup-content h2 {
+    color: white;
+  }
+  
+  /* Close button */
+  .close-btn {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff4c4c;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+  
+  /* Animation for popup */
+  @keyframes slideIn {
+    from {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Roadmap list */
+  .roadmap-list {
+    box-sizing: border-box;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #ddd;
+    overflow-y: scroll;
+    height: 100%;
+  }
+  
+  .roadmap-list li {
+    padding: 15px;
+    border-bottom: 1px solid #444;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: revealItem 0.8s forwards;
+    animation-timing-function: cubic-bezier(
+      0.68,
+      -0.55,
+      0.27,
+      1.55
+    ); /* Back and forth effect */
+  }
+  
+  .roadmap-list h2 {
+    padding: 0 15px;
+  }
+  
+  .roadmap-list li:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .roadmap-list li strong {
+    color: var(--gold);
+  }
+  
+  /* Completed items */
+  .completed {
+    /* color: #4caf50; */
+    font-weight: bold;
+    /* text-decoration: line-through; */
+  }
+  .in-progress {
+    /* color: var(--gold); */
+    font-weight: bold;
+  }
+  
+  /* Animation for list items */
+  @keyframes revealItem {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .popup-content {
+      width: 95%;
+    }
+    .whitepaper-content {
+      width: 95%;
+    }
+  
+    .roadmap-list {
+      font-size: 18px;
+    }
+  }
+  
+  /* AI Tool Popups */
+  #ai-meme-popup .whitepaper-content,
+  #ai-x-popup .whitepaper-content,
+  #ai-tg-popup .whitepaper-content {
+    background-image: none;
+    background-color: var(--navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+    height: auto;
+    min-height: 200px;
+    box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold), 0 0 30px var(--gold);
+  }
+  
+  /* Specific styling for TG bot popup */
+  #ai-tg-popup .whitepaper-content {
+    color: var(--gold);
+    font-weight: bold;
+  }
+  
+  .tg-link {
+    font-size: inherit;
+    text-decoration: underline;
+    margin: 0;
+    padding: 0 5px;
+    color: #f0f0f0;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Responsive adjustments for AI popups */
+  @media (max-width: 768px) {
+    #ai-meme-popup .whitepaper-content,
+    #ai-x-popup .whitepaper-content,
+    #ai-tg-popup .whitepaper-content {
+      font-size: 20px;
+      min-height: 150px;
+    }
+  }

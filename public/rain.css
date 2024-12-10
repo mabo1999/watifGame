@@ -1,0 +1,124 @@
+.question-mark {
+    position: fixed; /* Changed from absolute to fixed */
+    top: -50px;
+    font-size: 30px;
+    color: #001f3f;
+    animation: fallQuestionMarks linear infinite;
+    pointer-events: none; /* Prevent interaction */
+    z-index: 999;
+  }
+  
+  @keyframes fallQuestionMarks {
+    0% {
+      transform: translateY(0) rotate3d(0, 0, 0, 0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh)
+        rotate3d(var(--rotX), var(--rotY), var(--rotZ), var(--angle))
+        translateX(var(--translateX));
+      opacity: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .question-mark {
+      font-size: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .question-mark {
+      font-size: 10px;
+    }
+  }
+  
+  .thought {
+    box-sizing: border-box;
+    display: flex;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 50px;
+    min-width: 40px;
+    max-width: 85vw;
+    min-height: 40px;
+    margin: 20px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+  }
+  
+  .thought:before,
+  .thought:after {
+    content: "";
+    background-color: #fff;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .thought:before {
+    width: 50px;
+    height: 50px;
+    top: -15px;
+    left: 25px;
+    box-shadow: -60px 25px 0 -8px #fff, -40px 45px 0 -12px #fff,
+      -20px 35px 0 -10px #fff, -50px 5px 0 -15px #fff, -30px 15px 0 -7px #fff,
+      20px -10px 0 -5px #fff, 40px -5px 0 -10px #fff;
+  }
+  
+  .thought:after {
+    bottom: -12px;
+    right: 30px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 45px -40px 0 0 #fff, -35px -10px 0 -2px #fff,
+      -30px 20px 0 -6px #fff, -10px 30px 0 -10px #fff, -45px 5px 0 -8px #fff,
+      -20px -20px 0 -5px #fff, 15px 15px 0 -7px #fff, 35px -15px 0 -12px #fff,
+      20px -30px 0 -9px #fff;
+  }
+  
+  .falling-image {
+    position: absolute;
+    top: -5px;
+    width: 250px;
+    height: auto;
+    animation: fallImages var(--duration) linear forwards;
+    pointer-events: none;
+    z-index: 999;
+  }
+  
+  @keyframes fallImages {
+    0% {
+      transform: translateY(-100%) rotate3d(0, 0, 0, 0deg);
+      opacity: 1;
+    }
+    80% {
+      transform: translateY(calc(100vh - 100%))
+        rotate3d(var(--rotX), var(--rotY), var(--rotZ), var(--angle));
+      opacity: 1;
+    }
+    90%,
+    100% {
+      transform: translateY(calc(100vh - 100%))
+        rotate3d(var(--rotX), var(--rotY), var(--rotZ), var(--angle));
+      opacity: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .falling-image {
+      top: 0;
+      width: 200px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .falling-image {
+      top: 0;
+      width: 150px;
+    }
+  }

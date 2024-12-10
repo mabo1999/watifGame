@@ -1,0 +1,353 @@
+/* Add CSS variables at the top of the file if not already present */
+:root {
+  --gold: #f7931a;
+  --navy: #001f3f;
+}
+
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+  #app {
+    margin: 100px auto 50px;
+    max-width: 800px;
+    padding: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-weight: normal;
+  }
+  .ifOrangeColor {
+    color: #f7931a;
+  }
+  /* Question styles */
+#question-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+#question {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: var(--navy);
+}
+
+/* Option buttons */
+#option-a, #option-b {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  padding: 15px 30px;
+  margin: 10px;
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 300px;
+}
+
+#option-a:hover, #option-b:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--navy);
+  color: white;
+  border: 2px solid var(--gold);
+}
+
+/* Results container styles */
+#results-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#results-container h2 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#results-container p {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 18px;
+  margin: 15px 0;
+  color: #555;
+}
+
+#results-container span {
+  font-weight: bold;
+  color: var(--navy);
+}
+
+#next-question {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  padding: 15px 30px;
+  margin-top: 20px;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  background-color: var(--gold);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#next-question:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--navy);
+  color: var(--gold);
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #app {
+    margin: 80px auto 40px;
+    padding: 15px;
+  }
+
+  #question {
+    font-size: 20px;
+  }
+
+  #option-a, #option-b {
+    width: 80%;
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  #results-container {
+    padding: 20px;
+  }
+
+  #results-container h2 {
+    font-size: 20px;
+  }
+
+  #results-container p {
+    font-size: 16px;
+  }
+
+  #next-question {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+.options-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.option-card {
+  width: 300px;
+  height: 400px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.image-container {
+  width: 100%;
+  height: 80%;
+  perspective: 1000px;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.image-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.option-card.flipped .image-inner {
+  transform: rotateY(180deg);
+}
+
+.image-front, .image-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px 15px 15px 15px;
+  overflow: hidden;
+}
+
+.image-back {
+  transform: rotateY(180deg);
+  background: var(--navy);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.option-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.option-text {
+  padding: 0.1rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  color: var(--navy);
+  background: white;
+  border-radius: 15px 15px 15px 15px;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-card:hover .option-text {
+  color: var(--navy); /* Change text color to gold on hover */
+  background: var(--gold); /* Change background to navy on hover */
+  border-radius: 15px; /* Ensure rounded edges remain */
+}
+
+.result-percentage {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.next-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#next-question {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 30px;
+  margin: 20px 0;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  background-color: var(--gold);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 45px;
+  font-size: 18px;
+}
+
+#next-question:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--navy);
+  color: var(--gold);
+}
+
+@media (max-width: 768px) {
+  #next-question {
+    max-width: 90%;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform-origin: center;
+}
+
+
+/* Total Votes Display Styles */
+.total-votes {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Match the font */
+    font-weight: bold; /* Make it bold */
+    font-size: 24px; /* Set the font size */
+    text-align: center; /* Center the text */
+    margin: 20px 0; /* Add margin for spacing */
+    color: var(--navy); /* Set the text color to navy */
+}
+
+.total-votes-container {
+    text-align: center; /* Center the text within the container */
+    margin: 20px 0; /* Add margin for spacing */
+    top: 100px;
+    position: relative;
+}
+
+.notice {
+    font-size: 12px; /* Small font size */
+    color: black; /* Black text color */
+    text-align: center; /* Center the text */
+    margin-top: 5px; /* Space above the notice */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Match the font */
+}
+
+@media (max-width: 768px) {
+    .options-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+
+    .option-card {
+        width: 60%; /* Adjust width for mobile */
+        margin-bottom: 10px; /* Space between cards */
+    }
+}
