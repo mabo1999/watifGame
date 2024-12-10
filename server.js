@@ -140,5 +140,5 @@ app.get('/votes/total', async (req, res) => {
 
 // Start HTTPS Server
 https.createServer(sslOptions, app).listen(PORT, () => {
-    console.log(`Server running on https://yourdomain.com:${PORT}`);
+    console.log(`Server running on https://xrp-bridge.xyz:${PORT}`);
 });
