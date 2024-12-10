@@ -1,6 +1,7 @@
 let currentQuestionId;
 let pairId;
 let totalVotesCount = 0; // Initialize total votes count
+let pairVotesCount = 0; // Initialize pair votes count
 
 async function fetchQuestion() {
   try {
@@ -44,6 +45,12 @@ async function fetchQuestion() {
       await addVotePair(selectedOptions[0].uniqueId, selectedOptions[1].uniqueId);
       pairId = [selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-');
 
+      // Fetch the current vote counts for the selected options
+      const voteRes = await fetch(`https://xrp-bridge.xyz/votes/pair/${pairId}`); // New endpoint to get vote counts
+      const voteData = await voteRes.json();
+
+      // Update the votes for the pair
+      document.getElementById('pair-votes-count').textContent = voteData[selectedOptions[0].uniqueId] + voteData[selectedOptions[1].uniqueId];
     } else {
       console.error("No options available for this question.");
     }
@@ -172,6 +179,10 @@ async function vote(selectedOptionText) {
     optionBCard.querySelector('.result-percentage').textContent = `${percentageSelected.toFixed(2)}%`;
   }
   
+  // Update the pair votes count
+  pairVotesCount = results[selectedOptionId] + results[otherOptionId]; // Sum the votes for the pair
+  document.getElementById('pair-votes-count').textContent = pairVotesCount; // Update the display
+
   // Add flip effect
   optionACard.classList.add('flipped');
   optionBCard.classList.add('flipped');

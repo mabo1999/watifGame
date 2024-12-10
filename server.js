@@ -138,6 +138,21 @@ app.get('/votes/total', async (req, res) => {
     }
 });
 
+app.get('/votes/pair/:pairId', async (req, res) => {
+    const pairId = req.params.pairId;
+
+    try {
+        const existingVote = await votesCollection.findOne({ pair: pairId });
+        if (!existingVote) {
+            return res.status(404).json({ error: 'Vote pair not found' });
+        }
+        res.json(existingVote.votes); // Return the vote counts for the pair
+    } catch (error) {
+        console.error("Error fetching vote counts:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 // Start HTTPS Server
 https.createServer(sslOptions, app).listen(PORT, () => {
     console.log(`Server running on https://xrp-bridge.xyz:${PORT}`);

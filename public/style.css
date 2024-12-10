@@ -340,6 +340,15 @@ body {
     font-family: 'Comic Sans MS', cursive, sans-serif; /* Match the font */
 }
 
+.pair-votes {
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Match the font */
+  font-weight: bold; /* Make it bold */
+  font-size: 18px; /* Set the font size */
+  text-align: center; /* Center the text */
+  margin: 20px 0; /* Add margin for spacing */
+  color: var(--navy); /* Set the text color to navy */
+}
+
 @media (max-width: 768px) {
     .options-container {
         flex-direction: column; /* Stack items vertically */
