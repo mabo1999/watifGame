@@ -125,7 +125,7 @@ app.post('/votes/pair', async (req, res) => {
 // New endpoint to get total votes
 app.get('/votes/total', async (req, res) => {
     try {
-        const allVotes = await votesCollection.find({}).toArray(); // Fetch all vote entries
+        const allVotes = await votesCollection.find({}).toArray();
         let totalVotes = 0;
 
         // Log each vote entry
@@ -135,13 +135,19 @@ app.get('/votes/total', async (req, res) => {
         allVotes.forEach(voteEntry => {
             console.log('Vote entry:', voteEntry);
             for (const option in voteEntry.votes) {
-                console.log(`Adding votes for option ${option}:`, voteEntry.votes[option]);
-                totalVotes += voteEntry.votes[option];
+                const voteCount = voteEntry.votes[option];
+                // Only add if it's a valid number
+                if (!isNaN(voteCount)) {
+                    console.log(`Adding votes for option ${option}:`, voteCount);
+                    totalVotes += voteCount;
+                } else {
+                    console.log(`Skipping NaN value for option ${option}`);
+                }
             }
         });
 
         console.log('Server: Total votes calculated:', totalVotes);
-        res.json({ totalVotes }); // Respond with the total votes
+        res.json({ totalVotes });
     } catch (error) {
         console.error("Error fetching total votes:", error);
         res.status(500).json({ error: 'Internal server error' });
