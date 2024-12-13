@@ -360,3 +360,15 @@ body {
         margin-bottom: 10px; /* Space between cards */
     }
 }
+
+/* Update all font-family declarations */
+body, 
+button, 
+#question,
+#option-a, 
+#option-b,
+.total-votes,
+.pair-votes,
+.notice {
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Marker Felt', -apple-system, sans-serif;
+}
