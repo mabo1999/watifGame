@@ -85,15 +85,19 @@ async function addVotePair(optionA, optionB) {
 
 async function fetchTotalVotes() {
   try {
-    const res = await fetch('https://xrp-bridge.xyz/votes/total'); // Updated to your domain
+    console.log('Client: Fetching total votes...');
+    const res = await fetch('https://xrp-bridge.xyz/votes/total');
     if (!res.ok) {
       throw new Error(`Error fetching total votes: ${res.status}`);
     }
     const data = await res.json();
-    totalVotesCount = data.totalVotes; // Assuming the response has a totalVotes property
-    document.getElementById('total-votes-count').textContent = totalVotesCount; // Update the display
+    console.log('Client: Received total votes data:', data);
+    totalVotesCount = data.totalVotes;
+    console.log('Client: Updated totalVotesCount to:', totalVotesCount);
+    document.getElementById('total-votes-count').textContent = totalVotesCount;
+    console.log('Client: Updated DOM with total votes');
   } catch (error) {
-    console.error(error);
+    console.error('Client: Error fetching total votes:', error);
   }
 }
 
@@ -199,8 +203,11 @@ async function vote(selectedOptionText) {
     document.getElementById('question-container').appendChild(buttonContainer);
   }, 1000);
   
-  fetchTotalVotes();
-  document.getElementById('total-votes-count').textContent = totalVotesCount; // Update the display
+  console.log('Client: Before fetching total votes');
+  await fetchTotalVotes();
+  console.log('Client: After fetching total votes, count is:', totalVotesCount);
+  document.getElementById('total-votes-count').textContent = totalVotesCount;
+  console.log('Client: Updated total votes display');
 
   const votesText = document.getElementById('total-votes'); // Get the container
   votesText.classList.add('shake'); // Add shake class

@@ -135,6 +135,7 @@ app.get('/votes/total', async (req, res) => {
             }
         });
 
+        console.log('Server: Total votes calculated:', totalVotes);
         res.json({ totalVotes }); // Respond with the total votes
     } catch (error) {
         console.error("Error fetching total votes:", error);
