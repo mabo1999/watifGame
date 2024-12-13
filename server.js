@@ -128,10 +128,15 @@ app.get('/votes/total', async (req, res) => {
         const allVotes = await votesCollection.find({}).toArray(); // Fetch all vote entries
         let totalVotes = 0;
 
+        // Log each vote entry
+        console.log('All vote entries:', allVotes);
+
         // Sum the votes for each entry
         allVotes.forEach(voteEntry => {
+            console.log('Vote entry:', voteEntry);
             for (const option in voteEntry.votes) {
-                totalVotes += voteEntry.votes[option]; // Add the vote count for each option
+                console.log(`Adding votes for option ${option}:`, voteEntry.votes[option]);
+                totalVotes += voteEntry.votes[option];
             }
         });
 
