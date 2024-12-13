@@ -402,10 +402,12 @@ body {
 body, 
 button, 
 #question,
+#next-question,
 #option-a, 
 #option-b,
 .total-votes,
 .pair-votes,
-.notice {
+.notice,
+.other-links {
     font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Marker Felt', -apple-system, sans-serif;
 }
