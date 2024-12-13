@@ -128,21 +128,14 @@ app.get('/votes/total', async (req, res) => {
         const allVotes = await votesCollection.find({}).toArray();
         let totalVotes = 0;
 
-        // Log each vote entry
-        console.log('All vote entries:', allVotes);
-
         // Sum the votes for each entry
         allVotes.forEach(voteEntry => {
-            console.log('Vote entry:', voteEntry);
             for (const option in voteEntry.votes) {
                 const voteCount = voteEntry.votes[option];
                 // Only add if it's a valid number
                 if (!isNaN(voteCount)) {
-                    console.log(`Adding votes for option ${option}:`, voteCount);
                     totalVotes += voteCount;
-                } else {
-                    console.log(`Skipping NaN value for option ${option}`);
-                }
+                } 
             }
         });
 
