@@ -92,30 +92,34 @@ app.get('/questions/random', async (req, res) => {
 // New endpoint to add option pairs
 app.post('/votes/pair', async (req, res) => {
     const { optionA, optionB } = req.body;
-
-    // Sort options alphabetically to create a unique pair ID
+    
+    // Sort the options to ensure consistent pair IDs
     const pairId = [optionA, optionB].sort().join('-');
 
-    // Debugging information
-    console.log(`Adding vote pair: optionA = ${optionA}, optionB = ${optionB}, pairId = ${pairId}`);
-
-    // Check if the pair already exists
-    const existingVote = await votesCollection.findOne({ pair: pairId });
-    if (existingVote) {
-        return res.status(409).json({ message: 'Pair already exists' });
-    }
-
-    // If not, create a new entry with 0 votes for each option
-    const newVoteEntry = {
-        pair: pairId,
-        votes: {
-            [optionA]: 0,
-            [optionB]: 0
+    try {
+        // Check if the pair already exists
+        const existingVote = await votesCollection.findOne({ pair: pairId });
+        
+        if (existingVote) {
+            // If pair exists, return the existing vote data
+            return res.json(existingVote);
         }
-    };
 
-    await votesCollection.insertOne(newVoteEntry);
-    res.status(201).json(newVoteEntry);
+        // If pair doesn't exist, create new vote entry
+        const newVoteEntry = {
+            pair: pairId,
+            votes: {
+                [optionA]: 0,
+                [optionB]: 0
+            }
+        };
+
+        await votesCollection.insertOne(newVoteEntry);
+        res.status(201).json(newVoteEntry);
+    } catch (error) {
+        console.error("Error handling vote pair:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 // New endpoint to get total votes
