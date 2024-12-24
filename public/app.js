@@ -2,15 +2,55 @@ let currentQuestionId;
 let pairId;
 let totalVotesCount = 0; // Initialize total votes count
 let pairVotesCount = 0; // Initialize pair votes count
+let usedPairs = new Set(); // To store used pairs
+let recentQuestions = []; // To store the last 5 questions
 
 async function fetchQuestion() {
   try {
-    const res = await fetch('https://xrp-bridge.xyz/questions/random'); // Updated to your domain
-    if (!res.ok) {
-      throw new Error(`Error fetching question: ${res.status}`);
+    let question;
+    let selectedOptions;
+    let attempts = 0; // Initialize attempts counter
+    const maxAttempts = 20; // Set maximum attempts to prevent infinite loop
+    console.log("Recent Questions: ", recentQuestions);
+
+    do {
+      const res = await fetch('https://xrp-bridge.xyz/questions/random');
+      if (!res.ok) {
+        throw new Error(`Error fetching question: ${res.status}`);
+      }
+      question = await res.json();
+      console.log("New Question: ", question.id);
+
+      // Shuffle the options array
+      const shuffledOptions = question.options.sort(() => 0.5 - Math.random());
+      // Select the first two options
+      selectedOptions = shuffledOptions.slice(0, 2);
+
+      // Debugging: Print current usedPairs and selectedOptions
+      console.log('Current usedPairs:', Array.from(usedPairs));
+      console.log('Selected options:', [selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-'));
+      console.log('New Pair');
+
+
+      attempts++; // Increment attempts counter
+      console.log("Attempts: ", attempts)
+    } while (((recentQuestions.includes(question.id)) && 
+               attempts < maxAttempts) || usedPairs.has([selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-'))); // Ensure the question hasn't been shown recently or limit attempts
+
+    if (attempts >= maxAttempts) {
+      // If max attempts reached, set a default message
+      question = { id: null, text: "Thanks for playing!", options: [] }; // Set a message and empty options
+    } else {
+      // Add the question to recent questions
+      recentQuestions.push(question.id);
+      if (recentQuestions.length > 5) {
+        recentQuestions.shift(); // Keep only the last 5 questions
+      }
     }
-    const question = await res.json();
     
+    // Add the pair to used pairs
+    usedPairs.add([selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-'));
+
     currentQuestionId = question.id; // Set the current question ID
 
     const questionContainer = document.getElementById('question'); // Get the question container
@@ -23,37 +63,27 @@ async function fetchQuestion() {
 
     questionContainer.innerHTML = question.text;
 
-    // Check if options exist
-    if (question.options && question.options.length > 0) {
-      // Shuffle the options array
-      const shuffledOptions = question.options.sort(() => 0.5 - Math.random());
+    // Update option A
+    const optionACard = document.getElementById('option-a');
+    optionACard.querySelector('.option-image').src = selectedOptions[0].image; // Accessing the image path
+    optionACard.querySelector('.option-text').textContent = selectedOptions[0].text;
 
-      // Select the first two options
-      const selectedOptions = shuffledOptions.slice(0, 2);
+    // Update option B
+    const optionBCard = document.getElementById('option-b');
+    optionBCard.querySelector('.option-image').src = selectedOptions[1].image; // Accessing the image path
+    optionBCard.querySelector('.option-text').textContent = selectedOptions[1].text;
 
-      // Update option A
-      const optionACard = document.getElementById('option-a');
-      optionACard.querySelector('.option-image').src = selectedOptions[0].image; // Accessing the image path
-      optionACard.querySelector('.option-text').textContent = selectedOptions[0].text;
+    // Send the pair to the server to add to the votes collection
+    await addVotePair(selectedOptions[0].uniqueId, selectedOptions[1].uniqueId);
+    pairId = [selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-');
 
-      // Update option B
-      const optionBCard = document.getElementById('option-b');
-      optionBCard.querySelector('.option-image').src = selectedOptions[1].image; // Accessing the image path
-      optionBCard.querySelector('.option-text').textContent = selectedOptions[1].text;
+    // Fetch the current vote counts for the selected options
+    const voteRes = await fetch(`https://xrp-bridge.xyz/votes/pair/${pairId}`); // New endpoint to get vote counts
+    const voteData = await voteRes.json();
 
-      // Send the pair to the server to add to the votes collection
-      await addVotePair(selectedOptions[0].uniqueId, selectedOptions[1].uniqueId);
-      pairId = [selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-');
+    // Update the votes for the pair
+    document.getElementById('pair-votes-count').textContent = voteData[selectedOptions[0].uniqueId] + voteData[selectedOptions[1].uniqueId];
 
-      // Fetch the current vote counts for the selected options
-      const voteRes = await fetch(`https://xrp-bridge.xyz/votes/pair/${pairId}`); // New endpoint to get vote counts
-      const voteData = await voteRes.json();
-
-      // Update the votes for the pair
-      document.getElementById('pair-votes-count').textContent = voteData[selectedOptions[0].uniqueId] + voteData[selectedOptions[1].uniqueId];
-    } else {
-      console.error("No options available for this question.");
-    }
 
   } catch (error) {
     console.error(error);
