@@ -13,6 +13,14 @@ async function fetchQuestion() {
     const maxAttempts = 20; // Set maximum attempts to prevent infinite loop
     console.log("Recent Questions: ", recentQuestions);
 
+    // Set option cards to loading state
+    const optionACard = document.getElementById('option-a');
+    const optionBCard = document.getElementById('option-b');
+    optionACard.querySelector('.option-image').src = ''; // Clear the image
+    optionACard.querySelector('.option-text').textContent = 'Loading...'; // Set text to loading
+    optionBCard.querySelector('.option-image').src = ''; // Clear the image
+    optionBCard.querySelector('.option-text').textContent = 'Loading...'; // Set text to loading
+
     do {
       const res = await fetch('https://xrp-bridge.xyz/questions/random');
       if (!res.ok) {
@@ -30,8 +38,6 @@ async function fetchQuestion() {
       console.log('Current usedPairs:', Array.from(usedPairs));
       console.log('Selected options:', [selectedOptions[0].uniqueId, selectedOptions[1].uniqueId].sort().join('-'));
       console.log('New Pair');
-
-
       attempts++; // Increment attempts counter
       console.log("Attempts: ", attempts)
     } while (((recentQuestions.includes(question.id)) && 
