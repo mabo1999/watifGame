@@ -70,12 +70,12 @@ async function fetchQuestion() {
     questionContainer.innerHTML = question.text;
 
     // Update option A
-    const optionACard = document.getElementById('option-a');
+    //optionACard = document.getElementById('option-a');
     optionACard.querySelector('.option-image').src = selectedOptions[0].image; // Accessing the image path
     optionACard.querySelector('.option-text').textContent = selectedOptions[0].text;
 
     // Update option B
-    const optionBCard = document.getElementById('option-b');
+    //optionBCard = document.getElementById('option-b');
     optionBCard.querySelector('.option-image').src = selectedOptions[1].image; // Accessing the image path
     optionBCard.querySelector('.option-text').textContent = selectedOptions[1].text;
 
