@@ -139,3 +139,14 @@
       font-size: 14px;
     }
   }
+  
+  .home-icon {
+    display: inline-block; /* Ensure the link behaves like a block for scaling */
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
+    border: solid 2px black; /* Added black border */
+    border-radius: 5px; /* Optional: add border-radius for rounded corners */
+  }
+  
+  .home-icon:hover {
+    transform: scale(1.2); /* Scale effect on hover */
+  }
