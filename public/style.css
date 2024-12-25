@@ -411,3 +411,14 @@ button,
 .other-links {
     font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Marker Felt', -apple-system, sans-serif;
 }
+
+/* Add this to your CSS file */
+.majority-vote-count {
+    color: var(--navy); /* Set text color to navy */
+    font-size: 1.2em; /* Adjust font size as needed */
+}
+
+.majority-vote-count span {
+    color: var(--gold); /* Set the number color to gold */
+    font-weight: bold; /* Make the number bold for emphasis */
+}

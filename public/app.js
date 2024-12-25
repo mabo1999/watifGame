@@ -4,6 +4,7 @@ let totalVotesCount = 0; // Initialize total votes count
 let pairVotesCount = 0; // Initialize pair votes count
 let usedPairs = new Set(); // To store used pairs
 let recentQuestions = []; // To store the last 5 questions
+let majorityVoteCount = 0; // Initialize majority vote count
 
 async function fetchQuestion() {
   try {
@@ -218,7 +219,15 @@ async function vote(selectedOptionText) {
     optionACard.querySelector('.result-percentage').textContent = `${percentageUnselected.toFixed(2)}%`;
     optionBCard.querySelector('.result-percentage').textContent = `${percentageSelected.toFixed(2)}%`;
   }
-  
+
+  // Check if the selected option is the majority
+  if (percentageSelected > percentageUnselected) {
+    majorityVoteCount++; // Increment majority vote count
+  }
+
+  // Update the majority vote count display
+  document.getElementById('majority-vote-count-value').textContent = majorityVoteCount;
+
   // Update the pair votes count
   pairVotesCount = results[selectedOptionId] + results[otherOptionId]; // Sum the votes for the pair
   document.getElementById('pair-votes-count').textContent = pairVotesCount; // Update the display
