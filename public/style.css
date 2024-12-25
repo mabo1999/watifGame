@@ -416,9 +416,11 @@ button,
 .majority-vote-count {
     color: var(--navy); /* Set text color to navy */
     font-size: 1.2em; /* Adjust font size as needed */
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Marker Felt', -apple-system, sans-serif;
 }
 
 .majority-vote-count span {
     color: var(--gold); /* Set the number color to gold */
     font-weight: bold; /* Make the number bold for emphasis */
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Marker Felt', -apple-system, sans-serif;
 }
